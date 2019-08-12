@@ -9,20 +9,6 @@
 			"memory": 128
 		},
 		{
-			"name": "sidekiq",
-			"image": "mrdr/a4-sidekiq",
-			"hostname": "sidekiq",
-			"essential": false,
-			"memory": 128
-		},
-		{
-			"name": "cable",
-			"image": "mrdr/a4-cable",
-			"hostname": "cable",
-			"essential": false,
-			"memory": 128
-		},
-		{
 			"name": "nginx",
 			"image": "mrdr/a4-nginx",
 			"hostname": "nginx",
