@@ -1,0 +1,36 @@
+sudo: required
+services: 
+  - docker
+
+install:
+  - docker-compose up
+  
+script:
+  - docker-compose down
+
+after_success:
+  - docker build -t mrdr/a4-nginx -f ./a4_nginx/Dockerfile ./a4_nginx
+  - docker build -t mrdr/a4-rails ./a4_rails
+  - docker build -t mrdr/a4-sidekiq -f ./a4_rails/Dockerfile.sidekiq ./a4_rails
+  - docker build -t mrdr/a4-cable -f ./a4_rails/Dockerfile.cable ./a4_rails
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push mrdr/a4-nginx
+  - docker push mrdr/a4-rails 
+  - docker push mrdr/a4-sidekiq 
+  - docker push mrdr/a4-cable 
+
+deploy:
+  provider: elasticbeanstalk
+  region: ap-southeast-1
+  app: mrdr-atwo
+  env: MrdrAtwo-env
+  bucket_name: elasticbeanstalk-ap-southeast-1-969450302021
+  bucket_path: mrdr-atwo
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY

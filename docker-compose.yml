@@ -1,0 +1,70 @@
+version: '2'
+
+services:
+  postgres:
+    image: 'postgres:10.3-alpine'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+    env_file:
+      - './a4_rails/.env'
+
+  redis:
+    image: 'redis:4.0-alpine'
+    command: redis-server --requirepass yourpassword
+    volumes:
+      - 'redis:/data'
+
+  website:
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    build:
+      context: ./a4_rails
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - './a4_rails:/app'
+    env_file:
+      - './a4_rails/.env'
+
+  sidekiq:
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    build:
+      context: ./a4_rails
+      dockerfile: Dockerfile.sidekiq
+    volumes:
+      - './a4_rails:/app'
+    env_file:
+      - './a4_rails/.env'
+
+  cable:
+    depends_on:
+      - 'redis'
+    build:
+      context: ./a4_rails
+      dockerfile: Dockerfile.cable
+    ports:
+      - '28080:28080'
+    volumes:
+      - './a4_rails:/app'
+    env_file:
+      - './a4_rails/.env'
+
+  nginx:
+    restart: always
+    build:
+      context: ./a4_nginx
+      dockerfile: Dockerfile
+    ports:
+      - '3002:80'
+    depends_on:
+      - website
+    volumes:
+      - './a4_nginx/default.conf:/etc/nginx/conf.d/default.conf'
+
+volumes:
+  redis:
+  postgres:
