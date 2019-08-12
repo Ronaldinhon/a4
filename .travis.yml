@@ -3,7 +3,7 @@ services:
   - docker
 
 install:
-  - docker-compose up
+  - docker-compose up -d
   
 script:
   - docker-compose down
