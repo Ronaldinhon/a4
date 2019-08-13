@@ -1,17 +1,17 @@
 ---
 
 development:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_development?') %>
+  adapter: postgresql
+  encoding: unicode
 
 test:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_test?') %>
+  adapter: postgresql
+  encoding: unicode
 
 staging:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_staging?') %>
+  adapter: postgresql
+  encoding: unicode
 
 production:
-  database: <%= ENV['RDS_DB_NAME'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  port: <%= ENV['RDS_PORT'] %>
+  adapter: postgresql
+  encoding: unicode
