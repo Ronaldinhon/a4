@@ -21,6 +21,6 @@
 /public/assets/*
 # .env
 
-Dockerfile.dev
-Dockerfile.cable.dev
-Dockerfile.sidekiq.dev
+# Dockerfile.dev
+# Dockerfile.cable.dev
+# Dockerfile.sidekiq.dev
