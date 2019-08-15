@@ -34,7 +34,7 @@ services:
       - 'redis'
     build:
       context: ./a4_rails
-      dockerfile: Dockerfile.sidekiq
+      dockerfile: Dockerfile.sidekiq.dev
     volumes:
       - './a4_rails:/app'
     env_file:
@@ -45,7 +45,7 @@ services:
       - 'redis'
     build:
       context: ./a4_rails
-      dockerfile: Dockerfile.cable
+      dockerfile: Dockerfile.cable.dev
     ports:
       - '28080:28080'
     volumes:

@@ -13,6 +13,7 @@ after_success:
   - docker build -t mrdr/a4-rails ./a4_rails
   - docker build -t mrdr/a4-sidekiq -f ./a4_rails/Dockerfile.sidekiq ./a4_rails
   - docker build -t mrdr/a4-cable -f ./a4_rails/Dockerfile.cable ./a4_rails
+  - docker build -t mrdr/a4-react -f ./a4_react/Dockerfile ./a4_react
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
@@ -20,6 +21,7 @@ after_success:
   - docker push mrdr/a4-rails 
   - docker push mrdr/a4-sidekiq 
   - docker push mrdr/a4-cable 
+  - docker push mrdr/a4-react 
 
 deploy:
   provider: elasticbeanstalk

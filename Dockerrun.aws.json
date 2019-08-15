@@ -35,6 +35,13 @@
 			],
 		"links": ["website"],
 		"memory": 128
+		},
+		{
+			"name": "frontend",
+			"image": "mrdr/a4-react",
+			"hostname": "frontend",
+			"essential": false,
+			"memory": 128
 		}
 	]
 }
