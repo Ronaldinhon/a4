@@ -53,6 +53,17 @@ services:
     env_file:
       - './a4_rails/.env'
 
+  frontend:
+    build:
+      context: ./a4_react
+      dockerfile: Dockerfile
+    expose:
+      - '3001'
+    volumes:
+      - ./a4_react:/app
+    env_file:
+      - './a4_rails/.env'
+
   nginx:
     restart: always
     build:
