@@ -53,9 +53,17 @@ gem 'turbolinks', '~> 5'
 # Use Bootsnap to improve startup times
 # gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'rack-cors'
+
+gem 'active_model_serializers', '~> 0.10.0'
+
+gem 'httparty', '~> 0.17.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in your code to drop into a debugger console
   gem 'byebug', platform: :mri
+
+  gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
 end
 
 group :test do
