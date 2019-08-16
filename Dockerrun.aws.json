@@ -33,7 +33,7 @@
 					"containerPort": 80
 				}
 			],
-		"links": ["website"],
+		"links": ["website", "frontend"],
 		"memory": 128
 		},
 		{
